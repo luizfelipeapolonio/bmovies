@@ -1,32 +1,46 @@
+// Components
+import MovieCard from '../components/MovieCard';
+
+// Hooks
+import { useFetch } from '../hooks/useFetch';
 import { useEffect } from 'react';
 
-const url = process.env.REACT_APP_BASE_URL;
-const api_key = process.env.REACT_APP_API_KEY;
+// CSS
+import './MoviesLayout.css';
 
 const Home = () => {
 
-    const fetchTopRatedMovies = async (url) => {
+    const {movies} = useFetch();
 
-        try {
-            const resp = await fetch(url);
-            const json = await resp.json();
-
-            console.log(json);
-
-        } catch(error) {
-            console.log("Ocorreu um erro: ", error.message);
-        }
-    }
+    console.log(movies);
 
     useEffect(() => {
-        const topRatedUrl = `${url}/top_rated?${api_key}`;
+        const intersectionObserver = new IntersectionObserver((entries) => {
+            if(entries.some((entry) => entry.isIntersecting)) {
+                // setCurrentPage((prevsValue) => prevsValue + 1);
+                console.log("Está visível!");
+            }
+        });
+        
+        intersectionObserver.observe(document.querySelector('#sentinel'));
 
-        fetchTopRatedMovies(topRatedUrl);
+        return () => intersectionObserver.disconnect();
     }, []);
 
     return (
-        <div>
-            <h1>Home</h1>
+        <div className="main-container">
+            <h1>Filmes mais bem avaliados</h1>
+            <div className="movies-container">
+                {movies.length > 0 &&
+                    movies.map((movie) =>(
+                        <MovieCard 
+                            key={movie.id}
+                            movie={movie}
+                        />
+                    ))    
+                }
+                <div id="sentinel">sentinel</div>
+            </div>
         </div>
     );
 }
