@@ -1,5 +1,6 @@
 // Components
 import MovieCard from '../components/MovieCard';
+import Loading from '../components/Loading';
 
 // Hooks
 import { useFetch } from '../hooks/useFetch';
@@ -13,7 +14,7 @@ import './MoviesLayout.css';
 
 const Home = () => {
 
-    const {movies} = useFetch();
+    const {movies, loading} = useFetch();
     const { currentPage, setCurrentPage } = useContext(PageContext);
     const divSentinelRef = useRef();
 
@@ -48,7 +49,8 @@ const Home = () => {
                         />
                     ))    
                 }
-                <div id="sentinel" ref={divSentinelRef}>sentinel</div>
+                {loading && <Loading />}
+                <div id="sentinel" ref={divSentinelRef}></div>
             </div>
         </div>
     );
