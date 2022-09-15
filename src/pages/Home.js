@@ -3,7 +3,10 @@ import MovieCard from '../components/MovieCard';
 
 // Hooks
 import { useFetch } from '../hooks/useFetch';
-import { useEffect } from 'react';
+import { useEffect, useContext, useRef } from 'react';
+
+// Page Context
+import { PageContext } from '../context/PageContext';
 
 // CSS
 import './MoviesLayout.css';
@@ -11,21 +14,27 @@ import './MoviesLayout.css';
 const Home = () => {
 
     const {movies} = useFetch();
+    const { currentPage, setCurrentPage } = useContext(PageContext);
+    const divSentinelRef = useRef();
+
+    // Update page value every time scroll reaches the end of the page
+    useEffect(() => {
+        if(movies.length > 0) {
+            const intersectionObserver = new IntersectionObserver((entries) => {
+                if(entries.some((entry) => entry.isIntersecting)) {
+                    setCurrentPage((currentPage) => currentPage + 1);
+                    console.log("Está visível");
+                }
+            });
+
+            intersectionObserver.observe(divSentinelRef.current);
+
+            return () => intersectionObserver.disconnect();
+        }
+    }, [movies, setCurrentPage]);
 
     console.log(movies);
-
-    useEffect(() => {
-        const intersectionObserver = new IntersectionObserver((entries) => {
-            if(entries.some((entry) => entry.isIntersecting)) {
-                // setCurrentPage((prevsValue) => prevsValue + 1);
-                console.log("Está visível!");
-            }
-        });
-        
-        intersectionObserver.observe(document.querySelector('#sentinel'));
-
-        return () => intersectionObserver.disconnect();
-    }, []);
+    console.log(currentPage);
 
     return (
         <div className="main-container">
@@ -39,7 +48,7 @@ const Home = () => {
                         />
                     ))    
                 }
-                <div id="sentinel">sentinel</div>
+                <div id="sentinel" ref={divSentinelRef}>sentinel</div>
             </div>
         </div>
     );
