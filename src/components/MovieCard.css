@@ -18,35 +18,37 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 400px;
+    height: 100%;
 }
 
 .card-container #notfound-icon svg {
-    font-size: 4em;
+    font-size: 5rem;
     margin-bottom: 10px;
     color: #bfe9e5;
 }
 
 .card-container #notfound-icon p {
-    font-size: 1.5em;
+    font-size: 2rem;
     color: #bfe9e5;
 }
 
 .card-container h2 {
     color: #4dc2b6;
+    font-size: 2.4rem;
 }
 
 .card-container img,
 .card-container h2,
 #date,
-#vote-average {
+#vote-average,
+.card-container #notfound-icon {
     margin-bottom: 0.8em;
 }
 
 
 #vote-average,
 #date {
-    font-size: 1.1em;
+    font-size: 1.8rem;
 }
 
 #vote-average svg {
@@ -57,7 +59,7 @@
     background-color:#009787;
     padding: 1em;
     border-radius: 5px;
-    font-size: 1em;
+    font-size: 1.6rem;
     font-weight: bold;
     text-align: center;
     color: #f5f5f5;
@@ -67,4 +69,16 @@
 .card-container a:hover {
     background-color: #eaeaeb;
     color: #009787;
+}
+
+/* Media Queries */
+@media (max-width: 960px) {
+    .card-container #notfound-icon {
+        height: 100%;
+        max-height: 255px;
+    }
+
+    .card-container #not-found-icon svg {
+        font-size: 5.8rem;
+    }
 }

@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5em 1.8em;
+    padding: 2.7rem 3.1rem;
     background-color: #18181a;
 }
 
@@ -10,7 +10,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2em;
+    font-size: 3.2rem;
     font-weight: bold;
 }
 
@@ -23,6 +23,12 @@
 }
 
 .logo svg {
-    margin-right: 0.3em;
+    margin-right: 1rem;
     color: #009787;
+}
+
+@media (max-width: 960px) {
+    .logo {
+        font-size: 3.4rem;
+    }
 }

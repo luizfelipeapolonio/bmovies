@@ -2,7 +2,7 @@
 import './MovieCard.css';
 
 //Icons
-import { FaStar, FaSadTear } from 'react-icons/fa';
+import { FaStar, FaFrown } from 'react-icons/fa';
 
 // React Router
 import { Link } from 'react-router-dom';
@@ -31,7 +31,7 @@ const MovieCard = ({ movie }) => {
                 />
             ) : ( 
                     <div id="notfound-icon">
-                        <FaSadTear />
+                        <FaFrown />
                         <p>Oops!</p>
                         <p>Poster not found</p>
                     </div>  
@@ -43,7 +43,7 @@ const MovieCard = ({ movie }) => {
                 <p>{localDateFormat}</p>
             </div>
             <p id="vote-average"><FaStar /> {movie.vote_average}</p>
-            <Link to="/search">
+            <Link to={`/movie/${movie.id}`}>
                 Detalhes
             </Link>
         </div>

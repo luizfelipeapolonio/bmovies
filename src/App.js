@@ -1,9 +1,11 @@
 // Components
 import Navbar from './components/Navbar';
+import NotFound from './components/NotFound';
 
 //pages
 import Home from './pages/Home';
 import Search from './pages/Search';
+import MovieDetails from './pages/MovieDetails';
 
 // CSS
 import './App.css';
@@ -19,6 +21,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/movie/:id" element={<MovieDetails />} />
+          <Route 
+            path="*" 
+            element={<NotFound message="Página não encontrada!" type="page" />} 
+          />
         </Routes>
       </BrowserRouter>
       

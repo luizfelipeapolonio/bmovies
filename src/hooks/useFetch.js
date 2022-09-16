@@ -12,8 +12,9 @@ const searchUrl = process.env.REACT_APP_SEARCH_URL;
 export const useFetch = (query = null) => {
     const [movies, setMovies] = useState([]);
     const [searchMovies, setSearchMovies] = useState([]);
-    const { currentPage } = useContext(PageContext);
     const [loading, setLoading] = useState(false);
+    const [notFound, setNotFound] = useState(false);
+    const { currentPage } = useContext(PageContext);
 
     const language = "language=pt-BR";
 
@@ -80,16 +81,23 @@ export const useFetch = (query = null) => {
 
                     setSearchMovies(data.results);
 
+                    if(data.results.length === 0){
+                        setNotFound(true);
+                    }else {
+                        setNotFound(false);
+                    }
+
                 } catch(error) {
                     console.log("Ocorreu um erro ao buscar: ", error.message);
                 }
 
                 setLoading(false);
+                
             }
         }
 
         searchMovie();
     }, [query]);
 
-    return { movies, loading, searchMovies }
+    return { movies, loading, searchMovies, notFound }
 }

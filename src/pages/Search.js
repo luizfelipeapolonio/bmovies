@@ -1,6 +1,7 @@
 // Components
 import MovieCard from '../components/MovieCard';
 import Loading from '../components/Loading';
+import NotFound from '../components/NotFound';
 
 //CSS
 import './MoviesLayout.css';
@@ -11,7 +12,7 @@ import { useFetch } from '../hooks/useFetch';
 
 const Search = () => {
     const [searchParams] = useSearchParams();
-    const { searchMovies, loading } = useFetch(searchParams);
+    const { searchMovies, loading, notFound } = useFetch(searchParams);
     
     const movieSearched = searchParams.get("query");
 
@@ -32,12 +33,8 @@ const Search = () => {
                         />
                     ))
                 }
-                {/* {searchMovies.length === 0 &&
-                    !loading && (
-                        <h2>Sem resultados =( </h2>
-                    )
-                } */}
             </div>
+            {notFound && <NotFound message="Nada encontrado!" type="search" />}
         </div>
     );
 }
