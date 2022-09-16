@@ -12,12 +12,22 @@
     color: #f5f5f5;
 }
 
+.main-container #searched-movie {
+    margin: 1em 0;
+    color: #f5f5f5;
+}
+
+.main-container #searched-movie span {
+    color: #4dc2b6;
+}
+
 .movies-container {
     /* background-color: aquamarine; */
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     padding: 0 20px 80px;
+    width: 100%;
 }
 
 #sentinel {

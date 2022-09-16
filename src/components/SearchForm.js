@@ -19,10 +19,12 @@ const SearchForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        navigate(`/search?q=${query}`);
+        if(query.length === 0) {
+            return;
+        }
 
-        console.log("Query: ", query);
-        
+        navigate(`/search?query=${query}`);
+
         setQuery("");
         setCurrentPage(1);
     }

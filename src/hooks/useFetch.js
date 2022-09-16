@@ -7,9 +7,11 @@ import { PageContext } from '../context/PageContext';
 // Environment variables
 const baseUrl = process.env.REACT_APP_BASE_URL;
 const apiKey = process.env.REACT_APP_API_KEY;
+const searchUrl = process.env.REACT_APP_SEARCH_URL;
 
-export const useFetch = () => {
+export const useFetch = (query = null) => {
     const [movies, setMovies] = useState([]);
+    const [searchMovies, setSearchMovies] = useState([]);
     const { currentPage } = useContext(PageContext);
     const [loading, setLoading] = useState(false);
 
@@ -64,5 +66,30 @@ export const useFetch = () => {
         } 
     }, [currentPage]);
 
-    return { movies, loading }
+    useEffect(() => {
+        const searchMovie = async () => {
+            const searchMovieUrl = `${searchUrl}${apiKey}&${language}&${query}`;
+
+            if(query !== null) {
+
+                setLoading(true);
+                
+                try {
+                    const resp = await fetch(searchMovieUrl);
+                    const data = await resp.json();
+
+                    setSearchMovies(data.results);
+
+                } catch(error) {
+                    console.log("Ocorreu um erro ao buscar: ", error.message);
+                }
+
+                setLoading(false);
+            }
+        }
+
+        searchMovie();
+    }, [query]);
+
+    return { movies, loading, searchMovies }
 }
