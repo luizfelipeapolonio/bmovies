@@ -9,9 +9,10 @@ const baseUrl = process.env.REACT_APP_BASE_URL;
 const apiKey = process.env.REACT_APP_API_KEY;
 const searchUrl = process.env.REACT_APP_SEARCH_URL;
 
-export const useFetch = (query = null) => {
+export const useFetch = (query = null, id = null) => {
     const [movies, setMovies] = useState([]);
     const [searchMovies, setSearchMovies] = useState([]);
+    const [movieDetails, setMovieDetails] = useState([]);
     const [loading, setLoading] = useState(false);
     const [notFound, setNotFound] = useState(false);
     const { currentPage } = useContext(PageContext);
@@ -99,5 +100,30 @@ export const useFetch = (query = null) => {
         searchMovie();
     }, [query]);
 
-    return { movies, loading, searchMovies, notFound }
+    useEffect(() => {
+        const fetchMovieDetails = async () =>  {
+            const movieDetailsUrl = `${baseUrl}/${id}?${apiKey}&${language}`;
+
+            if(id !== null) {
+
+                setLoading(true);
+
+                try {
+                    const resp = await fetch(movieDetailsUrl);
+                    const data = await resp.json();
+
+                    setMovieDetails(data);
+
+                } catch(error) {
+                    console.log("Ocorreu um erro ao trazer detalhes do filme: ", error.message);
+                }
+
+                setLoading(false);
+            }  
+        }
+        
+        fetchMovieDetails();
+    }, [id]);
+
+    return { movies, loading, searchMovies, notFound, movieDetails }
 }
