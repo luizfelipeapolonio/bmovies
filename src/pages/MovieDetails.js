@@ -1,3 +1,6 @@
+// Components
+import Loading from '../components/Loading';
+
 // CSS
 import './MovieDetails.css';
 
@@ -16,8 +19,8 @@ import { useEffect, useContext } from 'react';
 
 const MovieDetails = () => {
     const { id } = useParams();
-    const { movieDetails } = useFetch(null, id);
-    const { currentPage, setCurrentPage } = useContext(PageContext);
+    const { movieDetails, loading } = useFetch(null, id);
+    const { setCurrentPage } = useContext(PageContext);
 
     const posterImage = process.env.REACT_APP_POSTER_IMG;
 
@@ -37,7 +40,6 @@ const MovieDetails = () => {
         setCurrentPage(1);
     }, [setCurrentPage]);
 
-    console.log("Movie Details: ", currentPage);
 
     // Convert values to the dollar format
     const currencyConvert = (value) => {
@@ -50,51 +52,66 @@ const MovieDetails = () => {
     console.log(movieDetails);
 
     return (
-        <div className="moviedetails-container">
-            {movieDetails.poster_path && (
-                 <img src={`${posterImage}${movieDetails.poster_path}`} alt="Movie Poster" />
-                )
-            }
-            <div className="movie-content">
-                <h1>{movieDetails.title}</h1>
-                {movieDetails.vote_average && (
-                    <p id="vote"><FaStar />{movieDetails.vote_average.toFixed(1)}</p>
-                )}
-                <div className="header-info">
-                    <ul>
-                        <li><span id="release">Lançamento: </span>{localDateFormat}</li>
-                        <li>
-                            <span id="genre">Gênero:</span> 
-                            {movieDetails.genres && (
-                                movieDetails.genres.map((genre) => (
-                                <span key={genre.id}>| {genre.name} </span>
-                            ))
-                        )}
-                        </li>
-                        <li><span id="runtime">Duração: </span>{movieDetails.runtime} min</li>
-                    </ul> 
-                </div>
-                <div className="tagline">
-                    <p>"{movieDetails.tagline}"</p>
-                </div>
-                <div className="movie-info">
-                    <h3><BsWallet2 /> Orçamento:</h3>
-                    {movieDetails.budget && (
-                        <p>{currencyConvert(movieDetails.budget)}</p>
+        <>
+        {loading ? <Loading /> : (
+            <div className="moviedetails-container">
+                {movieDetails.poster_path && (
+                    <img src={`${posterImage}${movieDetails.poster_path}`} alt="Movie Poster" />
+                    )
+                }
+                <div className="movie-content">
+                    <h1>{movieDetails.title}</h1>
+                    {movieDetails.vote_average > 0 && (
+                        <p id="vote"><FaStar />{movieDetails.vote_average.toFixed(1)}</p>
                     )}
-                </div>
-                <div className="movie-info">
-                    <h3><BsGraphUp /> Receita:</h3>
-                    {movieDetails.revenue && (
-                        <p>{currencyConvert(movieDetails.revenue)}</p>
-                    )} 
-                </div>
-                <div className="overview">
-                    <h3><FaRegFileAlt /> Sinopse:</h3>
-                    <p>{movieDetails.overview}</p>
+                    <div className="header-info">
+                        <ul>
+                            <li><span id="release">Lançamento: </span>{localDateFormat}</li>
+                            <li>
+                                <span id="genre">Gênero:</span> 
+                                {movieDetails.genres && (
+                                    movieDetails.genres.map((genre) => (
+                                    <span key={genre.id}>| {genre.name} </span>
+                                ))
+                            )}
+                            </li>
+                            <li><span id="runtime">Duração: </span>{movieDetails.runtime} min</li>
+                        </ul> 
+                    </div>
+                    <div className="tagline">
+                        {movieDetails.tagline && (
+                            <p>"{movieDetails.tagline}"</p>
+                        )}
+                    </div>
+                    <div className="movie-info">
+                        <h3><BsWallet2 /> Orçamento:</h3>
+                        {movieDetails.budget > 0 ? (
+                            <p>{currencyConvert(movieDetails.budget)}</p>
+                        ) : (
+                            <p>Sem informações</p>
+                        )}
+                    </div>
+                    <div className="movie-info">
+                        <h3><BsGraphUp /> Receita:</h3>
+                        {movieDetails.revenue > 0 ? (
+                            <p>{currencyConvert(movieDetails.revenue)}</p>
+                        ) : (
+                            <p>Sem informações</p>
+                        )} 
+                    </div>
+                    <div className="overview">
+                        <h3><FaRegFileAlt /> Sinopse:</h3>
+                        {movieDetails.overview ? (
+                            <p>{movieDetails.overview}</p>
+                        ) : (
+                            <p>Sem informações</p>
+                            )
+                        }
+                    </div>
                 </div>
             </div>
-        </div>
+        )}
+        </>
     );
 }
 
