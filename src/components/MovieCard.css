@@ -7,6 +7,7 @@
     margin: 1em;
     background-color: #303036;
     border-radius: 8px;
+    overflow-wrap: break-word;
 }
 
 .card-container img {
@@ -72,7 +73,11 @@
 }
 
 /* Media Queries */
-@media (max-width: 960px) {
+@media (max-width: 966px) {
+    .card-container {
+        width: 30%;
+    }
+
     .card-container #notfound-icon {
         height: 100%;
         max-height: 255px;
@@ -80,5 +85,18 @@
 
     .card-container #not-found-icon svg {
         font-size: 5.8rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .card-container {
+        width: 46%;
+    }
+}
+
+@media (max-width: 440px) {
+    .card-container {
+        width: 100%;
+        text-align: center;
     }
 }
