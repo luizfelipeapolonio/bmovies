@@ -1,3 +1,9 @@
+# BMovies - Filmes mais bem avaliados
+
+Site feito em React JS e consumindo a TMDB API, que lista os filmes mais bem avaliados. Possui funções como layout responsivo, carregamento dos filmes com scroll infinito, função de busca e informações sobre cada filme
+
+<img src="./gif/BMoviesGIF.gif" alt="Gif demonstração do projeto" />
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
