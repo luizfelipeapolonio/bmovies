@@ -2,75 +2,61 @@
 
 Site feito em React JS e consumindo a TMDB API, que lista os filmes mais bem avaliados. Possui funções como layout responsivo, carregamento dos filmes com scroll infinito, função de busca e informações sobre cada filme
 
-<img src="./gif/BMoviesGIF.gif" alt="Gif demonstração do projeto" />
+<img src="./assets/BMoviesGIF.gif" width="800px" alt="Gif demonstração do projeto" />
 
-# Getting Started with Create React App
+## 💻 Tecnologias utilizadas
+As seguintes ferramentas foram utilizadas na construção do projeto:
+- [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) | [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) | [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
+- [ReactJS](https://reactjs.org/)
+- [React Icons](https://react-icons.github.io/react-icons/)
+- [React Router Dom](https://reactrouter.com/en/main)
+- [TMDB API](https://www.themoviedb.org/documentation/api?language=pt-BR)
+- [Create React App](https://github.com/facebook/create-react-app)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 🚀 Funções/Recursos
+Principais funções e recursos da aplicação:
+- **Scroll Infinito:** uso da [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API), nativa do próprio Javascript, para carregar mais filmes quando a rolagem da página chega ao fim.
+- **Roteamento:** roteamento das páginas utilizando o [React Router Dom](https://reactrouter.com/en/main)
+- **Pesquisa:** busca os filmes pelo título baseado em `query string`, utilizando o [React Router Dom](https://reactrouter.com/en/main)
+- **Responsividade:** layout responsivo que se ajusta aos diferentes tamanhos de tela.
 
-## Available Scripts
+## 🛠 Pré-requisitos
+* Para começar, você precisa ter uma chave de acesso da [TMDB API](https://developers.themoviedb.org/3/getting-started/introduction)
+* Ter instalado o [Git](https://git-scm.com/) e o [NodeJs](https://nodejs.org/en/).
 
-In the project directory, you can run:
+## ⚙ Como rodar a aplicação
+Com o auxílio de um terminal, precisamos rodar alguns comandos para executar o projeto:
+* Primeiro, clone este repositório:
+```bash
+$ git clone https://github.com/luizfelipeapolonio/bmovies
+```
+* Acesse a pasta da aplicação:
+```bash
+$ cd bmovies
+```
+* Instale as dependências:
+```bash
+ $ npm install
+```
+* Agora, com o auxílio de um editor de códigos, criamos um arquivo `.env` na raíz da aplicação:
+<img src="./assets/env_file.png" alt="Criação do arquivo .env" />
 
-### `npm start`
+* Dentro do arquivo `.env`, coloque sua chave de acesso da TMDB API, e os endpoints da API, seguindo este modelo:
+```
+REACT_APP_API_KEY=api_key="Sua chave de acesso, sem aspas"
+REACT_APP_BASE_URL=https://api.themoviedb.org/3/movie
+REACT_APP_POSTER_IMG=https://image.tmdb.org/t/p/w500
+REACT_APP_SEARCH_URL=https://api.themoviedb.org/3/search/movie?
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+* Com o auxílio do terminal novamente, na pasta raíz da aplicação (bmovies), damos o comando para iniciar a aplicação:
+```bash
+$ npm start
+```
+* A aplicação irá abrir automaticamente no seu navegador na porta:3000, caso não abra, acesse http://localhost:3000
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📝 Licença
+Este repositório está licenciado pela **MIT LICENSE**. Para mais informações detalhadas, leia o arquivo [LICENSE](./LICENSE) contido neste repositório.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Autor
+Feito com 💜 por luizfelipeapolonio
